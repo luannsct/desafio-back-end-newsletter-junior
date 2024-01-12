@@ -3,7 +3,8 @@ const { validaStatus } = require("../utils/utils");
 
 const validarAtualizacaoStatus = async (req, res, next) => {
     try {
-        const { id, phone, message, status } = req.body;
+        let { id, status } = req.body;
+        status = status.toUpperCase()
         if (isNaN(id)) {
             return res.status(400).json({
                 message: `Oops.. O id: ${id}. Precisa ser um número.`
@@ -22,5 +23,12 @@ const validarAtualizacaoStatus = async (req, res, next) => {
         return res.status(500).json({ message: "Erro interno!" })
     }
 }
+const validaGetReport = (req, res, next) => {
+    let { status } = req.body;
+    if (validaStatus(status)) {
+        return res.status(400).json({ message: "Oops... Status enviado inválido!" })
+    }
+    next();
+}
 
-module.exports = { validarAtualizacaoStatus }
+module.exports = { validarAtualizacaoStatus, validaGetReport }
