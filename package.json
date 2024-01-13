@@ -4,7 +4,8 @@
   "description": "<h1 align=\"center\">Desafio: Desenvolvedor Back-end Júnior</h1>",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/server/server.js"
+    "dev": "nodemon ./src/server/server.js",
+    "start": "./src/server/server.js"
   },
   "author": "",
   "license": "ISC",
