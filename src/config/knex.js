@@ -1,13 +1,7 @@
 require('dotenv').config()
 const knex = require('knex')({
-    client: 'pg',
-    connection: {
-        host: 'localhost',
-        port: 5432,
-        user: 'postgres',
-        password: 123456,
-        database: 'envio_sms'
-    }
+    client: process.env.DB_CLIENT,
+    connection: process.env.DB_URI
 })
 
 module.exports = { knex }
