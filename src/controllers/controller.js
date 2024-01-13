@@ -27,13 +27,17 @@ const obterListaMensagensPorStatus = async (req, res) => {
 }
 const salvarRegistroBanco = async (req, res) => {
     const { phone, message, status } = req.dadosMessage;
-    let resultado = {}
-    if (status) {
-        resultado = await knex("sms_message").insert({ phone, message, status }).returning("*")
-    } else {
-        resultado = await knex("sms_message").insert({ phone, message }).returning("*")
+    try {
+        let resultado = {}
+        if (status) {
+            resultado = await knex("sms_message").insert({ phone, message, status }).returning("*")
+        } else {
+            resultado = await knex("sms_message").insert({ phone, message }).returning("*")
+        }
+        return res.status(200).json(resultado)
+    } catch (error) {
+        return res.status(500).json({ message: "Erro interno!" })
     }
-    return res.status(200).json(resultado)
 
 }
 module.exports = { atualizarStatusMensagem, obterListaMensagensPorStatus, salvarRegistroBanco }
