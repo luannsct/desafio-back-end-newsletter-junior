@@ -4,8 +4,9 @@ const { validarAtualizacaoStatus, validaGetReport, validarSalvarResgistro } = re
 const { atualizarStatusMensagem, obterListaMensagensPorStatus, salvarRegistroBanco } = require('../controllers/controller')
 const routes = express()
 routes.use(cors())
-routes.get('/', (req, res) => { return res.status(200).json({ message: "Olá mundo!" }) })
+
 routes.post('/insert', validarSalvarResgistro, salvarRegistroBanco)
 routes.post('/update', validarAtualizacaoStatus, atualizarStatusMensagem)
 routes.get('/reports', validaGetReport, obterListaMensagensPorStatus)
+routes.all('/', (req, res) => { return res.status(200).json({ message: "Olá mundo!" }) })
 module.exports = { routes }
